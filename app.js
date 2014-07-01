@@ -35,10 +35,11 @@ var MikaTypeApp = React.createClass({
     }.bind(this));
 
     return (
-      <div onKeyDown={this._handleKeyDown} onKeyUp={this._handleKeyUp} tabIndex="0">
-        <div className="keyboard">
+      <div>
+        <div className="keyboard" onKeyDown={this._handleKeyDown} onKeyUp={this._handleKeyUp} tabIndex="0">
           {keys}
         </div>
+        <p>Click to focus the gray area before typing...</p>
       </div>
     );
   }

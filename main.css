@@ -1,6 +1,7 @@
 
-.btn.key { width: 34px; }
+.keyboard { background-color: lightgray; }
 .keys-row-0 { margin-left: 13px }
 .keys-row-1 { margin-left: 26px }
 .keys-row-2 { margin-left: 39px }
 .keys-row-3 { margin-left: 52px }
+.btn.key { width: 34px; }
