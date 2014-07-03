@@ -1,7 +1,8 @@
 
 .keyboard { background-color: lightgray; }
-.keys-row-0 { margin-left: 13px }
-.keys-row-1 { margin-left: 26px }
-.keys-row-2 { margin-left: 39px }
-.keys-row-3 { margin-left: 52px }
+.keys-row { margin-left: 8px }
+.keys-row-0 .kbd-key:first-child { margin-left: 13px }
+.keys-row-1 .kbd-key:first-child { margin-left: 26px }
+.keys-row-2 .kbd-key:first-child { margin-left: 39px }
+.keys-row-3 .kbd-key:first-child { margin-left: 52px }
 .btn.kbd-key { width: 34px; }
