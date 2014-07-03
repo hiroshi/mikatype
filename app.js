@@ -8,8 +8,8 @@
 var rowKeys = [
   "1234567890",
   "QWERTYUIOP",
-  "ASDFGHJKL",
-  "ZXCVBNM"
+  "ASDFGHJKL;",
+  "ZXCVBNM,./"
 ];
 
 var Keyboard = React.createClass({
@@ -68,7 +68,16 @@ var MikaTypeApp = React.createClass({
     this.setState({lastChar: c});
   },
   _handleKeyDown: function(event) {
-    var c = String.fromCharCode(event.keyCode);
+    //console.log("keyCode: " + event.keyCode);
+    var c = {
+      186: ";",
+      188: ",",
+      190: ".",
+      191: "/",
+    }[event.keyCode];
+    if (c == undefined) {
+      c = String.fromCharCode(event.keyCode);
+    }
     this.setState({inputChar: c});
     if (c == this.state.lastChar) {
       this.setState({wrongChar: null})
