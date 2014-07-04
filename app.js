@@ -50,7 +50,7 @@ var Keyboard = React.createClass({
 var MikaTypeApp = React.createClass({
   getInitialState: function() {
     var rows = [false, false, true, false];
-    return {inputChar: null, rows: rows};
+    return {inputChar: null, rows: rows, count: 0, timer: 30, started: false};
   },
   componentWillMount: function() {
     this._chooseKey();
@@ -79,11 +79,26 @@ var MikaTypeApp = React.createClass({
       c = String.fromCharCode(event.keyCode);
     }
     this.setState({inputChar: c});
+    var count = this.state.count;
     if (c == this.state.lastChar) {
-      this.setState({wrongChar: null})
+      count += 1;
       this._chooseKey();
+      this.setState({wrongChar: null});
     } else {
-      this.setState({wrongChar: c})
+      count -= 1;
+      this.setState({wrongChar: c});
+    }
+    if (this.state.timer > 0) {
+      this.setState({count: count});
+    }
+    if (!this.state.started) {
+      this.setState({started: true});
+      setInterval(function() {
+        var timer = this.state.timer;
+        if (timer > 0) {
+          this.setState({timer: timer - 1});
+        }
+      }.bind(this), 1000);
     }
   },
   _handleKeyUp: function(event) {
@@ -96,16 +111,26 @@ var MikaTypeApp = React.createClass({
     this.setState({rows: rows});
   },
   render: function() {
+    var lastKeyClasses = "btn last-key " + (this.state.timer < 1 ? "btn-danger" : "btn-default");
     return (
-      <div onKeyDown={this._handleKeyDown} onKeyUp={this._handleKeyUp} tabIndex="0">
-        <h2>{this.state.lastChar}</h2>
-        <Keyboard
-          inputChar={this.state.inputChar}
-          wrongChar={this.state.wrongChar}
-          rows={this.state.rows}
-          toggleRow={this.toggleRow}
-        />
-        <p>Click to focus the gray area before typing...</p>
+      <div className="col-xs-12" onKeyDown={this._handleKeyDown} onKeyUp={this._handleKeyUp} tabIndex="0">
+        <div className="row header">
+          <button className={lastKeyClasses}>
+            {this.state.lastChar}
+          </button>
+          <div className="col-xs-2 counter">
+            timer: {this.state.timer}<br/>
+            count: {this.state.count}
+          </div>
+        </div>
+        <div className="row">
+          <Keyboard
+            inputChar={this.state.inputChar}
+            wrongChar={this.state.wrongChar}
+            rows={this.state.rows}
+            toggleRow={this.toggleRow}
+          />
+        </div>
       </div>
     );
   }

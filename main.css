@@ -6,3 +6,18 @@
 .keys-row-2 .kbd-key:first-child { margin-left: 39px }
 .keys-row-3 .kbd-key:first-child { margin-left: 52px }
 .btn.kbd-key { width: 34px; }
+
+.header {
+  position: relative;
+  margin-bottom: 4px;
+}
+.last-key {
+  font-size: 34px;
+  font-weight: semi-bold;
+  width: 60px;
+}
+.counter {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
